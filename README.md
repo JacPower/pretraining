@@ -1,34 +1,29 @@
----
-
 # Java Design Patterns & OOP Notes
 
-## 1. Introduction
+## Introduction
 
-* Design Patterns are **reusable solutions** to common software design problems.
-* Help achieve **maintainability, scalability, and flexibility** in code.
-* Categories:
+Design Patterns provide **reusable solutions** to common software design problems. They help improve **code maintainability, scalability, and flexibility**. Patterns are categorized as:
 
-  1. **Creational Patterns** – Object creation mechanisms.
-  2. **Structural Patterns** – Object composition and structure.
-  3. **Behavioral Patterns** – Object interaction and responsibility.
+1. **Creational Patterns** – Handle object creation mechanisms.
+2. **Structural Patterns** – Deal with object composition and structure.
+3. **Behavioral Patterns** – Define object interaction and responsibilities.
 
 ---
 
-## 2. Creational Patterns (Summary & Examples)
+## Creational Patterns
 
-* Focus on **how objects are created**.
-* Common types:
+Focus on **object creation** and decoupling the client from implementation.
 
 ### Singleton
 
-Ensures a class has only one instance.
+Ensures a class has **only one instance**.
 
 ```java
 public class Singleton {
     private static Singleton instance;
     private Singleton() {}
     public static Singleton getInstance() {
-        if(instance == null) instance = new Singleton();
+        if (instance == null) instance = new Singleton();
         return instance;
     }
 }
@@ -56,12 +51,13 @@ class ShapeFactory {
 
 ### Builder
 
-Step-by-step object construction.
+Constructs complex objects **step by step**.
 
 ```java
 class User {
     private String name;
     private int age;
+
     public static class Builder {
         private String name;
         private int age;
@@ -69,18 +65,23 @@ class User {
         public Builder setAge(int age) { this.age = age; return this; }
         public User build() { return new User(this); }
     }
-    private User(Builder builder) { this.name = builder.name; this.age = builder.age; }
+
+    private User(Builder builder) {
+        this.name = builder.name;
+        this.age = builder.age;
+    }
 }
 ```
 
 ---
 
-## 3. Behavioural Patterns
+## Behavioural Patterns
 
-### 3.1 Strategy Pattern
+Focus on **how objects interact** and delegate responsibilities.
 
-* Defines a family of algorithms and **makes them interchangeable**.
-* **Use Case:** When multiple behaviors can be selected at runtime.
+### Strategy Pattern
+
+Defines a family of algorithms and allows **dynamic selection** at runtime.
 
 ```java
 interface PaymentStrategy { void pay(int amount); }
@@ -104,10 +105,9 @@ ShoppingCart cart = new ShoppingCart(new PayPalPayment());
 cart.checkout(100);
 ```
 
-### 3.2 Template Method Pattern
+### Template Method Pattern
 
-* Defines the **skeleton of an algorithm**, deferring some steps to subclasses.
-* Promotes **code reuse** and **inversion of control**.
+Defines the **skeleton of an algorithm**, with some steps **implemented by subclasses**.
 
 ```java
 abstract class Game {
@@ -135,13 +135,15 @@ game.play();
 
 ---
 
-## 4. SOLID Principles
+## SOLID Principles
 
-1. **S – Single Responsibility Principle (SRP)**: A class should have **only one reason to change**.
-2. **O – Open/Closed Principle (OCP)**: Open for extension, closed for modification.
-3. **L – Liskov Substitution Principle (LSP)**: Subtypes must be **replaceable** by their base types without breaking functionality.
-4. **I – Interface Segregation Principle (ISP)**: Many **specific interfaces** are better than a single general-purpose interface.
-5. **D – Dependency Inversion Principle (DIP)**: Depend on **abstractions**, not concrete implementations.
+Guidelines for writing **clean, maintainable, and flexible code**.
+
+1. **S – Single Responsibility Principle (SRP)**: A class should have only **one reason to change**.
+2. **O – Open/Closed Principle (OCP)**: Open for **extension**, closed for **modification**.
+3. **L – Liskov Substitution Principle (LSP)**: Subtypes must be **replaceable** by their base types.
+4. **I – Interface Segregation Principle (ISP)**: Prefer **multiple small interfaces** over a large general-purpose interface.
+5. **D – Dependency Inversion Principle (DIP)**: Depend on **abstractions** rather than concrete implementations.
 
 **Example (SRP):**
 
@@ -154,8 +156,6 @@ class InvoicePrinter { void print(Invoice invoice) {} } // Separate responsibili
 
 ## Summary
 
-* Creational patterns: Focus on object creation (Singleton, Factory, Builder).
-* Behavioural patterns: Focus on **how objects interact** (Strategy, Template Method).
-* SOLID: Guides writing **clean, maintainable, and flexible OOP code**.
-
----
+* Creational Patterns: Handle object creation (Singleton, Factory, Builder).
+* Behavioural Patterns: Manage object interaction (Strategy, Template Method).
+* SOLID Principles: Ensure **clean, maintainable, and flexible OOP code**.
